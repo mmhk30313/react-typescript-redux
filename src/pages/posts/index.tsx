@@ -17,7 +17,7 @@ const Posts = () => {
         dispatch(get_all_posts());
         dispatch(get_all_users())
     }, []);
-    console.log({user_list});
+    // console.log({user_list});
     
     const setOrderPost = (order: string) => {
         order === 'ascending'
@@ -30,7 +30,7 @@ const Posts = () => {
         setSelectedUser(user_id);
     }
 
-    console.log({user_details});
+    // console.log({user_details});
     
     return (
         <React.Fragment>
@@ -86,7 +86,7 @@ const Posts = () => {
                     
                     >
                         <Descriptions style={{background: '#ddeabc'}}  title="Author Details" className='my-3 p-3'>
-                            {/* <Descriptions.Item label="Name: ">{user_details?.name}</Descriptions.Item> */}
+                            <Descriptions.Item label="Name: ">{user_details?.name}</Descriptions.Item>
                             <Descriptions.Item label="Phone: ">{user_details?.phone}</Descriptions.Item>
                             <Descriptions.Item label="Email: ">{user_details?.email}</Descriptions.Item>
                             <Descriptions.Item label="Company: ">

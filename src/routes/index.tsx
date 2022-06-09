@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from '../components/PrivateRoute';
 import Layout from '../layouts/layout';
 import Dashboard from '../pages/dashboard';
@@ -20,12 +20,16 @@ const Routes = () => {
                             <Dashboard/>
                         </Layout>
                     </PrivateRoute>
-                    <PrivateRoute path="/users" component={() => <Layout>
-                        <Users/>
-                    </Layout>} />
-                    <PrivateRoute path={'/posts'} component={() => <Layout>
-                        <Posts/>
-                    </Layout>} />
+                    <PrivateRoute path="/users" >
+                        <Layout>
+                            <Users/>
+                        </Layout>
+                    </PrivateRoute>
+                    <PrivateRoute path={'/posts'}>
+                        <Layout>
+                            <Posts/>
+                        </Layout>
+                    </PrivateRoute>
                     <Route exact path="*" component={() => <h1>Page not found</h1> } />
                 </Switch>
             </Router>

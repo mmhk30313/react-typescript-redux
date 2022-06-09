@@ -11,7 +11,7 @@ export const get_user_details_posts = (userId: number) => {
             });
 
             const user_details = await get_user_details("https://jsonplaceholder.typicode.com/users?id="+userId);
-            console.log({user_details});
+            // console.log({user_details});
             
             // const user = users?.data[Math.floor(Math.random() * 10)];
             const user_posts = await get_user_posts(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);

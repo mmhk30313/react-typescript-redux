@@ -6,12 +6,6 @@ import {
 
 const initial_state = {
     is_loading: false,
-    // user_length: 0,
-    // post_length: 0,
-    // comment_length: 0,
-    // album_length: 0,
-    // photo_length: 0,
-    // todo_length: 0,
     dashboard_data: [],
     error: null,
 }

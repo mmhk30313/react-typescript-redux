@@ -12,7 +12,7 @@ const Dashboard = () => {
     useEffect(() => {
         dispatch(get_user_post_comment_album_photo_todo_length())
     }, []);
-    console.log({dashboard_data});
+    // console.log({dashboard_data});
     
     return (
         <React.Fragment>

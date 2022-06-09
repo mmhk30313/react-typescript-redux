@@ -11,7 +11,7 @@ export const get_all_users = () => {
             });
 
             const users = await get_users("https://jsonplaceholder.typicode.com/users", null);
-            console.log({users})
+            // console.log({users})
             dispatch({
                 type: user_get_success,
                 payload: users,

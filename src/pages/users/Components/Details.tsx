@@ -5,16 +5,11 @@ import AntModal from '../../../components/AntModal';
 import { get_user_details_posts } from '../../../services/actions/user_posts_actions';
 const Details = ({dataId, visibleModal, setVisibleModal}: any) => {
     const {user_details, user_posts} = useSelector((state: any) => state.user_posts_reducer);
-    // const [modal_visible, setModalVisible] = useState(false);
-    // const [userData, setUserData] = useState({});
-    // const [userPosts, setUserPosts] = useState([]);
-    // const [details, setDetails]: any = useState([]);
-    // const [posts, setPosts]: any = useState([]);
     const dispatch: any = useDispatch();
     useEffect(() => {
         dispatch(get_user_details_posts(dataId));
     }, []);
-    console.log({user_details, user_posts});
+    // console.log({user_details, user_posts});
     const removeModal = () => {
         // setModalVisible(false);
         setVisibleModal(false);

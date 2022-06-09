@@ -1,20 +1,25 @@
 import { Fragment, PureComponent } from "react";
 import { Link } from 'react-router-dom';
-import { Layout, Menu, Card } from 'antd';
-import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, WeiboOutlined, SelectOutlined, BankOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, SelectOutlined, BankOutlined } from '@ant-design/icons';
 import './navigations.scss';
 import React from "react";
+import { useSelector } from "react-redux";
 // const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
-type MyProps = {};
-type MyState = { collapsed: boolean, key: string };
+type MyProps = {
+    user: any
+};
+
+type MyState = { collapsed: boolean, key: string, user: any };
 export default class DashNavigation extends PureComponent<MyProps, MyState> {
     constructor(props: any) {
         super(props);
         this.state = {
             collapsed: false,
             key: '/',
+            user: props?.user
       
         };
     }
@@ -23,7 +28,7 @@ export default class DashNavigation extends PureComponent<MyProps, MyState> {
       const pathname = window.location.pathname;
       // console.log({pathname});
       this.setState({
-        key: pathname
+        key: pathname,
       });
     }
 
@@ -35,6 +40,10 @@ export default class DashNavigation extends PureComponent<MyProps, MyState> {
   
     render() {
         const {children} = this.props;
+        const {user} = this.state;
+        // console.log({user});
+        
+        
         return (
             <Fragment>
                 <Layout className="bg-white">
@@ -52,7 +61,8 @@ export default class DashNavigation extends PureComponent<MyProps, MyState> {
                         }}
                     >
                     <div className='logo'>
-                        <UserOutlined className="logo-img" /> <span>MMHK</span>
+                        <img className="img-fluid rounded-circle" src={user?.avatar} alt="user" height={35} width={35} /> <span>{user?.name?.match(/\b([A-Z])/g).join('')}</span>
+                        {/* <UserOutlined className="logo-img" /> <span>MMHK</span> */}
                     </div>
                     <Menu
                         mode="inline"

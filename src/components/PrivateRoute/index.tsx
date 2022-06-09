@@ -6,7 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 const PrivateRoute = ({children, ...rest}: any) => {
     const state = useSelector((state: any) => state.login_logout_reducer);
     const { is_logged_in } = state;
-    console.log({is_logged_in});
+    // console.log({is_logged_in});
     
     return (
         <Route
