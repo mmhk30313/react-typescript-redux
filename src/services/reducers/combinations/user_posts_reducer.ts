@@ -1,4 +1,4 @@
-import { user_posts_get_failure, user_posts_get_success, user_posts_request } from "../../types"
+import { ascending_order_user_post, descending_order_user_post, user_posts_get_failure, user_posts_get_success, user_posts_request } from "../../types"
 
 const initial_state = {
     is_loading: false,
@@ -27,6 +27,16 @@ export default (state = initial_state, action: any) => {
                 user_details:  {},
                 user_posts: [],
                 error: action.payload,
+            };
+        case ascending_order_user_post:
+            return {
+                ...state,
+                user_posts: state.user_posts.sort((a: any, b: any) => a.id - b.id),
+            };
+        case descending_order_user_post:
+            return {
+                ...state,
+                user_posts: state.user_posts.sort((a: any, b: any) => b.id - a.id),
             };
         default:
             return state;

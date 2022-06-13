@@ -9,6 +9,8 @@ export const user_post_comment_album_photo_todo_get_length_failure
 = "user_post_comment_album_photo_todo_get_length_failure";
 
 // Post sorting / filtering action types
+export const ascending_order_user_post = "ascending_order_user_post";
+export const descending_order_user_post = "descending_order_user_post";
 export const sort_post = "SORT_POST";
 export const filter_post = "FILTER_POST";
 

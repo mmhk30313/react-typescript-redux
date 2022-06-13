@@ -2,12 +2,14 @@ import { Card, Col, Descriptions, Row, Select, Skeleton } from 'antd';
 import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { get_all_posts, get_posts_desc_order } from '../../services/actions/post_action';
+import { ascending_user_post_order, descending_user_post_order } from '../../services/actions/user_posts_actions';
 import { get_all_users } from '../../services/actions/user_action';
 import { get_user_details_posts } from '../../services/actions/user_posts_actions';
 import './post.scss';
 const {Option} = Select;
 const Posts = () => {
     const [selectedUser, setSelectedUser]: any = useState(null);
+    const [selectedOrder, setSelectedOrder]: any = useState("ascending");
     const {post_reducer, user_reducer, user_posts_reducer} = useSelector((state: any) => state);
     const {is_loading, post_list} = post_reducer;
     const {users: user_list} = user_reducer;
@@ -20,9 +22,17 @@ const Posts = () => {
     // console.log({user_list});
     
     const setOrderPost = (order: string) => {
-        order === 'ascending'
-        ? dispatch(get_all_posts())
-        : dispatch(get_posts_desc_order());
+        setSelectedOrder(order);
+        if(selectedUser) {
+            order === 'ascending'
+            ? dispatch(ascending_user_post_order())
+            : dispatch(descending_user_post_order());
+        }else{
+            order === 'ascending'
+            ? dispatch(get_all_posts())
+            : dispatch(get_posts_desc_order());
+        }
+            
     }
 
     const searchPostsByUser = (user_id: number) => {
@@ -47,7 +57,10 @@ const Posts = () => {
                             style={{ width: "100%" }}
                             placeholder="Select an author"
                             optionFilterProp="children"
-                            onChange={(value: number) => searchPostsByUser(value)}
+                            onChange={(value: number) => {
+                                searchPostsByUser(value);
+                                setSelectedOrder("ascending");
+                            }}
                             filterOption={(input: any, option: any) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }
@@ -60,7 +73,21 @@ const Posts = () => {
                             ))}
                         </Select>
                     </Col>
-                    {
+                    <Col span={8} xs={24} md={12} lg={12}>
+                            <p>Sort Action</p>
+                            <Select
+                                value={selectedOrder}
+                                style={{ width: "100%" }}
+                                onChange={(value: string) => {
+                                    setOrderPost(value);
+                                }}
+                                className="mb-3"
+                            >
+                                <Option value="ascending">Ascending</Option>
+                                <Option value="descending">Descending</Option>
+                            </Select>
+                        </Col>
+                    {/* {
                         !selectedUser
                         ? <Col span={8} xs={24} md={12} lg={12}>
                             <p>Sort Action</p>
@@ -77,13 +104,13 @@ const Posts = () => {
                             </Select>
                         </Col>
                         : null
-                    }
+                    } */}
                 </Row>
                 {
                     selectedUser ?
                     <Skeleton 
                         loading={!user_details?.id} 
-                    
+                        className="mt-3"
                     >
                         <Descriptions style={{background: '#ddeabc'}}  title="Author Details" className='my-3 p-3'>
                             <Descriptions.Item label="Name: ">{user_details?.name}</Descriptions.Item>
@@ -145,3 +172,4 @@ const Posts = () => {
 };
 
 export default Posts;
+

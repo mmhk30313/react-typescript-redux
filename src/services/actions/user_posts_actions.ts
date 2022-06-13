@@ -1,3 +1,4 @@
+import { ascending_order_user_post, descending_order_user_post } from './../types';
 import { get_user_details, get_user_posts } from './../service_function/user_service';
 import { user_posts_get_failure, user_posts_get_success, user_posts_request } from "../types";
 
@@ -28,6 +29,21 @@ export const get_user_details_posts = (userId: number) => {
             });
         }
             
+    };   
+}
+
+export const ascending_user_post_order = () => {
+    return (dispatch: any) => {
+        dispatch({
+            type: ascending_order_user_post,
+        });
     };
-        
+}
+
+export const descending_user_post_order = () => {
+    return (dispatch: any) => {
+        dispatch({
+            type: descending_order_user_post,
+        });
+    };
 }
